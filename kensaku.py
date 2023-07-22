@@ -14,7 +14,7 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 
 # csvファイル参照
-file = pd.read_csv("csv/samsung.csv")
+file = pd.read_csv("csv/TOPIX.csv")
 
 # 訓練用データ、テスト用データの準備
 training_data = file.iloc[:1500, 1:2]
@@ -42,15 +42,17 @@ X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
 # LSTM
 model = Sequential()
 
-model.add(LSTM(units = 20, return_sequences = True, input_shape = (X_train.shape[1], 1)))
-
-model.add(LSTM(units = 20, return_sequences = True))
+model.add(LSTM(units = 50, return_sequences = True, input_shape = (X_train.shape[1], 1)))
 model.add(Dropout(0.2))
 
-model.add(LSTM(units = 20, return_sequences = True))
+model.add(LSTM(units = 50, return_sequences = True))
 model.add(Dropout(0.2))
 
-model.add(LSTM(units = 20))
+model.add(LSTM(units = 50, return_sequences = True))
+model.add(Dropout(0.2))
+
+model.add(LSTM(units = 50))
+model.add(Dropout(0.2))
 
 model.add(Dense(units = 1))
 
@@ -66,7 +68,7 @@ inputs = inputs.reshape(-1, 1)
 inputs = mmsc.transform(inputs)
 # (640, 1)
 
-for i in range(60, 1017):
+for i in range(60, 1005):
     X_test.append(inputs[i-60:i, 0])
 
 X_test = np.array(X_test)
@@ -77,13 +79,13 @@ predicted_stock_price = model.predict(X_test)
 predicted_stock_price = mmsc.inverse_transform(predicted_stock_price)
 
 # 推定結果をplot
-plt.plot(file.loc[1500:, '日付け'],test_data.values, color = 'red', label = 'Real Samsung Stock Price')
-plt.plot(file.loc[1500:, '日付け'],predicted_stock_price, color = 'blue', label = 'Predicted Samsung Stock Price')
+plt.plot(file.loc[1500:, '日付け'],test_data.values, color = 'red', label = 'Real TOPIX Stock Price')
+plt.plot(file.loc[1500:, '日付け'],predicted_stock_price, color = 'blue', label = 'Predicted TOPIX Stock Price')
 
-plt.xticks(np.arange(0,957,150))
+plt.xticks(np.arange(0,945,150))
 
-plt.title('Samsung Stock Price Prediction')
+plt.title('TOPIX Stock Price Prediction')
 plt.xlabel('Time')
-plt.ylabel('Samsung Stock Price')
+plt.ylabel('TOPIX Stock Price')
 plt.legend()
 plt.show()
