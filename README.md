@@ -19,3 +19,13 @@ cd Serching-Technology
 ```
 pip install -r requirements.txt
 ```
+
+## 分析結果
+### TOPIXの推定結果
+<center><img src="/img/Figure_1.png" width="800" height="600"></center>
+
+### SAMSUNG Electronicsの推定結果
+<center><img src="/img/Figure_2.png" width="800" height="600"></center>
+
+## LSTMレイアの説明
+　今回使ったLSTMのレイアの説明をする。
