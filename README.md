@@ -11,7 +11,7 @@
 　株価データは時間とともに順次的な特性を持っており、過去の価格動向が未来の価格変動に影響を及ぼす。LSTMはこのような長期依存性をキャプチャーし、以前の時間段階の情報を効果的に記憶して株価予測が可能であると考えられた。
 
 ## ダウンロード
-　pythonのversionは3.10を使用した。
+　pythonのversionは3.10.11を使用した。
 ```
 git clone https://github.com/bamtor1190/Serching-Technology.git
 cd Serching-Technology
