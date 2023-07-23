@@ -14,6 +14,7 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 
 # csvファイル参照
+# samsungの場合、samsung.csvに変更
 file = pd.read_csv("csv/TOPIX.csv")
 
 # 訓練用データ、テスト用データの準備
@@ -68,6 +69,7 @@ inputs = inputs.reshape(-1, 1)
 inputs = mmsc.transform(inputs)
 # (640, 1)
 
+# samsungの場合、1005 -> 1017
 for i in range(60, 1005):
     X_test.append(inputs[i-60:i, 0])
 
@@ -82,6 +84,7 @@ predicted_stock_price = mmsc.inverse_transform(predicted_stock_price)
 plt.plot(file.loc[1500:, '日付け'],test_data.values, color = 'red', label = 'Real TOPIX Stock Price')
 plt.plot(file.loc[1500:, '日付け'],predicted_stock_price, color = 'blue', label = 'Predicted TOPIX Stock Price')
 
+# samsungの場合、945 -> 957
 plt.xticks(np.arange(0,945,150))
 
 plt.title('TOPIX Stock Price Prediction')
